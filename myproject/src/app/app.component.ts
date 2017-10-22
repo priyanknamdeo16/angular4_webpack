@@ -1,18 +1,15 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
-
 import {Hero} from './hero';
+import { HeroService } from './hero.service';
 
-const HEROES: Hero[] = [
-  { id: 11, name: 'Neha' },
-  { id: 12, name: 'Iti' },
-  { id: 13, name: 'Priyank' }
-];
 
 //decorator for AppComponent
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [HeroService]
 })
 export class AppComponent {
   public title : string;
@@ -20,10 +17,24 @@ export class AppComponent {
   public heroes: Hero[];
 
   //constructor
-  constructor () {
+  constructor (private heroService: HeroService) {
     this.title = 'tour of heroes';
-    //this.hero  = HEROES[0];
-    this.heroes = HEROES;
+    //this.heroes = this.heroService.getHeroes();
+  }
+
+  getHeroes = () => {
+    this.heroService.getHeroes().then((heroes) => this.heroes = heroes);
+  }
+
+  getHeroesSlowly = () => {
+    this.heroService.getHeroesSlowly().then((heroes) => this.heroes = heroes);
+  }
+
+  
+
+  ngOnInit(): void {
+    //this.getHeroes();
+    this.getHeroesSlowly();
   }
   
   //on select listner
