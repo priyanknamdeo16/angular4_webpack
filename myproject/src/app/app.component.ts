@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 
-//hero class defined
-export class Hero {
-  public id:number;
-  public name:string;
-}
+import {Hero} from './hero';
 
 const HEROES: Hero[] = [
   { id: 11, name: 'Neha' },
@@ -29,7 +25,7 @@ export class AppComponent {
     //this.hero  = HEROES[0];
     this.heroes = HEROES;
   }
-
+  
   //on select listner
   onSelect = (hero) => {
     this.selectedHero = hero;
